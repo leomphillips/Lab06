@@ -23,8 +23,7 @@ knitr::include_graphics("img/Speaking-the-world.jpg")
 
 _Write your comments about image 1 below_
 
-
-
+#Invalid maths - There is not 1,026 billion chinese speakers.
 
 
 ## Image 2
@@ -35,7 +34,7 @@ knitr::include_graphics("img/rose-pop-density-total-area-bw.jpg")
 
 _Write your comments about image 2 below_
 
-
+#Confusing chart presentation and no numerical values attached to chart - lack of quantitative information.
 
 
 ## Image 3
@@ -46,7 +45,7 @@ knitr::include_graphics("img/life-expectancy-rule-of-law.png")
 
 _Write your comments about image 3 below_
 
-
+#Confusing graphical presentation, x-axis label, and country data name labels. No numerical data given - lack of quantitative information.
 
 
 ## Image 4
@@ -57,9 +56,7 @@ knitr::include_graphics("img/global-income-dist.PNG")
 
 _Write your comments about image 4 below_
 
-
-
-
+#Confusing presentation technique, x-axis scale is inconsistent, y-axis label is too long and unclear, data overlaps and is not understandable.
 
 # Exercises
 
@@ -72,13 +69,15 @@ staff <- read_csv("data/instructional-staff.csv")
 
 What is the difference between *wide format* data and *long format* data?
 
+Wide format data has more rows than columns. Long format data has more columns than rows, where variables are at the top of the columns.
 
 Is the format `staff` data *wide* or *long*?
 
+The data set 'staff' is a wide format data set, since there are more columns than rows.
 
 How many observations are there in the data set?
 
-
+There are 55 observations in this dataset.
 
 
 ## Exercise 2
@@ -86,13 +85,12 @@ How many observations are there in the data set?
 ```{r pivoting}
 ## Uncomment and complete the following code
 
-#staff_long <- ___ %>%
-#  ___(
-#    cols = ____, 
-#    names_to = "_____",
-#    values_to = "percent"
-#    )
-
+staff_long <- staff %>% 
+  pivot_longer(
+    cols = '1975':'2011',
+    names_to = "year",
+    values_to = "percent"
+  )
 ```
 
 
@@ -101,6 +99,11 @@ How many observations are there in the data set?
 ```{r dot-plot}
 # Write your code for Exercise 3 here
 
+staff_long %>% 
+  ggplot(aes( x = year, 
+              y = percent,
+              colour = faculty_type))  +
+  geom_point()
 
 
 ```
